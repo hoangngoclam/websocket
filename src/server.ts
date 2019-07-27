@@ -22,6 +22,6 @@ const server = http.createServer(app);
 
 websocketClass(server);
 
-server.listen(port, () => console.log(`Server listening on port ${port}`));
+server.listen(process.env.PORT, () => console.log(`Server listening on port ${port}`));
 
 export default server;
