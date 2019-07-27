@@ -1,0 +1,9 @@
+{
+  "mongooseURI": "mongodb://egame:eDeUmZRHKwEhn4f3CC0YunX6adwJJikd7xbz7nctfYe0YJI3xepiEcyNkW6Ko3b10Z5qlqB5sKdIukMUdyqTjw==@egame.documents.azure.com:10255/development?ssl=true",
+  "JWT_SECRET_KEY": "E;XNNVH(a/5C3sD",
+  "CLOUD_UPLOAD_IMAGES": {
+    "cloud_name": "dalatcowork",
+    "api_key": "335814642522664",
+    "api_secret": "bPKuFnDwgnTBzE7We1N0AHmrCVw"
+  }
+}

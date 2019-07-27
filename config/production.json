@@ -1,0 +1,4 @@
+{
+  "mongooseURI": "mongodb://egame:eDeUmZRHKwEhn4f3CC0YunX6adwJJikd7xbz7nctfYe0YJI3xepiEcyNkW6Ko3b10Z5qlqB5sKdIukMUdyqTjw==@egame.documents.azure.com:10255/production?ssl=true",
+  "JWT_SECRET_KEY": "E;XNNVH(a/5C3sD"
+}

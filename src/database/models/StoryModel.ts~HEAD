@@ -1,0 +1,9 @@
+import {BaseModel} from "./BaseModel"
+import {Schema} from "mongoose";
+
+export const StoryModel = BaseModel("stories", {
+    photo:{type:String},
+    content:{type:String},
+    userId:{type: Schema.Types.ObjectId,ref:"users"},
+    likes:[{type:Schema.Types.ObjectId,ref:"users"}],
+});
