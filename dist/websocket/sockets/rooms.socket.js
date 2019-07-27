@@ -5,11 +5,22 @@ class RoomsSocket {
     constructor() {
         this.listRoom = [];
     }
+    getListRoomInfo() {
+        return {
+            listRoom: this.listRoom.map(room => {
+                return room.getShortInfo();
+            })
+        };
+    }
     createRoom(player) {
         if (this.checkAuthCreated(player.getId())) {
             return false;
         }
-        let newRoom = new room_socket_1.default(Math.floor(Math.random() * 100000 + 1).toString(), player);
+        let roomId = Math.floor(Math.random() * 100000 + 1).toString();
+        let newRoom = new room_socket_1.default(roomId, player);
+        newRoom.setAuth(player);
+        newRoom.addPlayer(player);
+        player.setRoomId(roomId);
         this.addRoom(newRoom);
         return true;
     }
@@ -37,7 +48,7 @@ class RoomsSocket {
     }
     findRoomById(id) {
         let rooms = this.listRoom.find(room => {
-            return room.getRoomId() === id;
+            return room.getRoomId().toString() === id;
         });
         return rooms;
     }

@@ -23,7 +23,7 @@ export class RouteReceiveMessage {
                 this.socketController.sendAllUser();
                 break;
             case "CREATE_ROOM":
-                //data:{type:"CREATE_ROOM",roomId:"123"}
+                //data:{type:"CREATE_ROOM"}
                 this.socketController.createRoom();
                 break;
             case "JOIN_ROOM":

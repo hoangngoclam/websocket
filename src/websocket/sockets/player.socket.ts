@@ -19,6 +19,9 @@ class PlayerSocket extends BaseSocket{
     sendMessage(message){
         this.ws.send(message);
     }
+    getShortInfo(){
+        return{id:this.id,roomId:this.roomId};
+    }
 }
 
 export default PlayerSocket

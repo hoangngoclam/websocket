@@ -9,11 +9,22 @@ class RoomsSocket {
 
     }
 
+    getListRoomInfo(){
+        return{
+            listRoom:this.listRoom.map(room=>{
+                return room.getShortInfo();
+            })
+        }
+    }
     createRoom(player:PlayerSocket) {
         if(this.checkAuthCreated(player.getId())){
             return false;
         }
-        let newRoom = new RoomSocket(Math.floor(Math.random()*100000+1).toString(),player);
+        let roomId = Math.floor(Math.random()*100000+1).toString();
+        let newRoom = new RoomSocket(roomId,player);
+        newRoom.setAuth(player);
+        newRoom.addPlayer(player);
+        player.setRoomId(roomId);
         this.addRoom(newRoom);
         return true;
     }
@@ -44,7 +55,7 @@ class RoomsSocket {
 
     findRoomById(id:string){
         let rooms = this.listRoom.find(room=>{
-            return room.getRoomId() === id;
+            return room.getRoomId().toString() === id;
         });
         return rooms;
     }

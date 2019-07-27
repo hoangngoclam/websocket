@@ -1,6 +1,7 @@
 import BaseSocket from "./base.socket";
 import PlayerSocket from "./player.socket";
-
+import Message from "./message.class";
+let message = new Message();
 class RoomSocket {
     protected id:string;
     protected auth:PlayerSocket;
@@ -12,6 +13,17 @@ class RoomSocket {
     }
     setAuth(player:PlayerSocket){
         this.auth = player;
+    }
+    getShortInfo(){
+        let payload = {
+            id:this.id,
+            auth:this.auth.getShortInfo(),
+            maxPlayer:this.maxPlayerNumber,
+            listPlayer:this.listPlayer.map(item=>{
+                return item.getShortInfo();
+            })
+        };
+        return payload;
     }
     getAuth(){
         return this.auth;
@@ -26,9 +38,9 @@ class RoomSocket {
         return true;
     }
 
-    sendToAllPlayer(message:string){
+    sendToAllPlayer(msg:string){
         this.listPlayer.forEach(player=>{
-            player.ws.send(`send in room ${this.id} message: ${message}`);
+            player.ws.send(msg);
         })
     }
 

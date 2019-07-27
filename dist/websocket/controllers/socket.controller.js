@@ -12,48 +12,57 @@ class SocketController {
         this.websocketClass.players.sendMessageToAllPlayer(message.getDefaultMessage(this.data.message));
     }
     createRoom() {
-        // if (this.websocketClass.rooms.addRoom(this.player)) {
-        //     this.player.sendMessage(message.getSuccessMessage("Create room success"));
-        //     this.player.sendMessage(message.getDefaultMessage(`Have 1 Player in this room`));
-        // }
-        // else {
-        //     this.player.sendMessage(message.getErrorMessage("Fail to create Room"));
-        // }
+        if (this.websocketClass.rooms.createRoom(this.player)) {
+            this.player.sendMessage(message.getSuccessMessage("Create room success"));
+            this.player.sendMessage(message.getDefaultMessage(JSON.stringify(this.websocketClass.rooms.getListRoomInfo())));
+        }
+        else {
+            this.player.sendMessage(message.getErrorMessage("Fail to create Room"));
+        }
     }
     joinRoom() {
         let roomPlayerJoinInto = this.websocketClass.rooms.findRoomById(this.data.roomId.toString());
         if (roomPlayerJoinInto) {
             roomPlayerJoinInto.addPlayer(this.player);
-            this.player.sendMessage(message.getSuccessMessage("join to room success"));
+            this.player.sendMessage(message.getSuccessMessage("Join to room success"));
             this.player.setRoomId(this.data.roomId);
-            this.player.sendMessage(message.getDefaultMessage(`Have ${roomPlayerJoinInto.listPlayer.length} Player in this room`));
+            this.player.sendMessage(message.getDefaultMessage(JSON.stringify(roomPlayerJoinInto.getShortInfo())));
         }
         else {
             this.player.sendMessage(message.getErrorMessage("Fail to join to class"));
         }
     }
     outRoom() {
-        let roomPlayerMoveOut = this.websocketClass.rooms.findRoomById(this.data.roomId);
+        if (!this.player.getRoomId()) {
+            this.player.sendMessage(message.getErrorMessage("Some thing wrong"));
+        }
+        let roomPlayerMoveOut = this.websocketClass.rooms.findRoomById(this.player.getRoomId().toString());
         if (roomPlayerMoveOut) {
             roomPlayerMoveOut.removePlayer(this.player.getId());
+            this.player.setRoomId(null);
+            if (roomPlayerMoveOut.listPlayer.length === 0) {
+                this.websocketClass.rooms.removeRoomById(this.player.getRoomId());
+            }
             this.player.sendMessage(message.getSuccessMessage("out room success"));
             this.player.setRoomId(null);
-            this.player.sendMessage(message.getDefaultMessage(`Have ${roomPlayerMoveOut.listPlayer.length} Player in this room`));
+            this.player.sendMessage(message.getDefaultMessage(JSON.stringify(this.websocketClass.rooms.getListRoomInfo())));
         }
-        this.player.sendMessage(message.getErrorMessage("Fail to join to class"));
+        else {
+            this.player.sendMessage(message.getErrorMessage("Fail to out class"));
+        }
     }
     callInRoom() {
         if (!this.player.getRoomId()) {
-            this.player.sendMessage("you not in this room");
+            this.player.sendMessage(message.getErrorMessage("you not in this room"));
             return;
         }
         let roomForCall = this.websocketClass.rooms.findRoomById(this.player.getRoomId().toString());
         if (roomForCall) {
-            roomForCall.sendToAllPlayer(this.data.message);
-            this.player.sendMessage("send message success");
+            roomForCall.sendToAllPlayer(message.getDefaultMessage(this.data.message));
+            this.player.sendMessage(message.getSuccessMessage("send message success"));
         }
         else {
-            this.player.sendMessage("error call to this room");
+            this.player.sendMessage(message.getErrorMessage("error call to this room"));
         }
     }
 }

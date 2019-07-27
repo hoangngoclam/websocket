@@ -8,11 +8,6 @@ class PlayersSocket {
 
     }
 
-    /**
-     *
-     * @param id
-     * @return boolean
-     */
     addPlayerById(id:string,webSocket) {
         let newPlayer = new PlayerSocket(id,webSocket);
         if (!this.findPlayerById(id)) {
@@ -22,10 +17,6 @@ class PlayersSocket {
         return false;
     }
 
-    /**
-     *
-     * @param player
-     */
     addPlayer(player: PlayerSocket) {
         this.listPlayer.push(player);
     }
@@ -36,20 +27,12 @@ class PlayersSocket {
         })
     }
 
-    /**
-     *
-     * @param id
-     */
     removePlayerById(id: string) {
         this.listPlayer = this.listPlayer.filter(room => {
             return room.getId() !== id;
         })
     }
 
-    /**
-     *
-     * @param message
-     */
     sendMessageToAllPlayer(message) {
         this.listPlayer.forEach(player => {
             player.sendMessage(message);

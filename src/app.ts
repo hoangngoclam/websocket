@@ -38,10 +38,10 @@ class App {
         this.app.use(cors(corsOptions));
 
         // use routes
-        // new Routes(this.app);
+        new Routes(this.app);
 
         //connect to DB
-        // databaseConfig.connect();
+        databaseConfig.connect();
     }
 }
 
