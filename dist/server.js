@@ -19,5 +19,5 @@ if (config.util.getEnv('NODE_ENV') !== 'test') {
 }
 const server = http.createServer(app_1.default);
 WebsocketClass_1.websocketClass(server);
-server.listen(port, () => console.log(`Server listening on port ${port}`));
+server.listen(process.env.PORT, () => console.log(`Server listening on port ${port}`));
 exports.default = server;

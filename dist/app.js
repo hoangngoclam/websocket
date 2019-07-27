@@ -1,9 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
-const routes_1 = require("./routes");
 const cookieParser = require("cookie-parser");
-const databaseConfig = require("./database/config");
 const morgan = require("morgan");
 const config = require("config");
 const cors = require("cors");
@@ -31,9 +29,9 @@ class App {
         };
         this.app.use(cors(corsOptions));
         // use routes
-        new routes_1.Routes(this.app);
+        // new Routes(this.app);
         //connect to DB
-        databaseConfig.connect();
+        // databaseConfig.connect();
     }
 }
 exports.default = new App().app;
