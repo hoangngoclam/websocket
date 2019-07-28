@@ -38,7 +38,7 @@ class RoomSocket {
         return true;
     }
 
-    sendToAllPlayer(msg:string){
+    sendToAllPlayer(msg){
         this.listPlayer.forEach(player=>{
             player.ws.send(msg);
         })

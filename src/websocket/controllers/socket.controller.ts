@@ -52,7 +52,7 @@ class SocketController {
             if(roomPlayerMoveOut.listPlayer.length === 0){
                 this.websocketClass.rooms.removeRoomById(this.player.getRoomId());
             }
-            this.player.sendMessage(message.getSuccessMessage("out room success"));
+            this.player.sendMessage(message.getSuccessMessage("Out room success"));
             this.player.setRoomId(null);
             this.player.sendMessage(message.getDefaultMessage(JSON.stringify(this.websocketClass.rooms.getListRoomInfo())))
         }
@@ -63,15 +63,15 @@ class SocketController {
 
     callInRoom() {
         if (!this.player.getRoomId()) {
-            this.player.sendMessage(message.getErrorMessage("you not in this room"));
+            this.player.sendMessage(message.getErrorMessage("You have not joined any room"));
             return;
         }
         let roomForCall = this.websocketClass.rooms.findRoomById(this.player.getRoomId().toString());
         if (roomForCall) {
             roomForCall.sendToAllPlayer(message.getDefaultMessage(this.data.message));
-            this.player.sendMessage(message.getSuccessMessage("send message success"));
+            this.player.sendMessage(message.getSuccessMessage("Send message success"));
         } else {
-            this.player.sendMessage(message.getErrorMessage("error call to this room"));
+            this.player.sendMessage(message.getErrorMessage("Error call to this room"));
         }
     }
 }
