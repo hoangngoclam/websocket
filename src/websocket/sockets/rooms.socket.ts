@@ -29,23 +29,8 @@ class RoomsSocket {
         return true;
     }
 
-    joinMemberToRoom(player:PlayerSocket,roomId:string){
-        try {
-            let targetRoom = this.listRoom.find(room=>room.getRoomId() === roomId);
-            targetRoom.addPlayer(player);
-            return true;
-        }
-        catch (e) {
-            return false;
-        }
-    }
-
     protected addRoom(room: RoomSocket) {
         this.listRoom.push(room);
-    }
-    sendMessageToRoomId(message:string,id:string){
-        let targetRoom = this.listRoom.find(room=>room.getRoomId() === id);
-        targetRoom.sendToAllPlayer(message);
     }
     removeRoomById(id: string) {
         this.listRoom = this.listRoom.filter(room => {

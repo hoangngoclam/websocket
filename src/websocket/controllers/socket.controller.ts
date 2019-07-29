@@ -43,7 +43,7 @@ class SocketController {
 
     outRoom() {
         if(!this.player.getRoomId()){
-            this.player.sendMessage(message.getErrorMessage("Some thing wrong"));
+            this.player.sendMessage(message.getErrorMessage("You have not room"));
         }
         let roomPlayerMoveOut = this.websocketClass.rooms.findRoomById(this.player.getRoomId().toString());
         if (roomPlayerMoveOut) {

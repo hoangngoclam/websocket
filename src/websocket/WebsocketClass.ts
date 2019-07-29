@@ -43,7 +43,6 @@ class WebsocketClass {
                 } else {
                     ws.terminate();
                 }
-
             } catch (e) {
                 console.log(e);
             }
