@@ -1,5 +1,3 @@
-
-import auth from "../middlewares/auth";
 import QuestionsController from "../controllers/questions.controller";
 
 export class Questions {
@@ -8,8 +6,8 @@ export class Questions {
             .post(QuestionsController.create())
             .get(QuestionsController.getAll());
         app.route('/questions/:id')
-            .get(auth, QuestionsController.getById())
-            .put(auth, QuestionsController.updateById())
-            .delete(auth, QuestionsController.deleteById());
+            .get(QuestionsController.getById())
+            .put(QuestionsController.updateById())
+            .delete(QuestionsController.deleteById());
     }
 }
