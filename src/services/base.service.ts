@@ -7,6 +7,7 @@ export default class BaseService {
 
     async create(item) {
         try {
+            console.log(item)
             return await this.Repository.create(item)
         } catch (e) {
             throw new Error(e)

@@ -27,6 +27,7 @@ class WebsocketClass {
                 if (url.pathname === "/sockets" && url.query.id) { //allow connect link: http://localhost:5000/sockets?id=12312
                     if (!this.players.addPlayerById(url.query.id.toString(), ws)) { //add player to list return true or false
                         ws.terminate(); //disconnect socket (Player)
+                        return;
                     }
 
                     let player = this.players.findPlayerById(url.query.id);
