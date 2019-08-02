@@ -11,28 +11,35 @@ export default class UserService extends BaseService {
     constructor() {
         super(Repository)
     }
-    create = async user => {
-        if (_.isEmpty(user.username)) throw new Error("Username is required!");
-        if (_.isEmpty(user.password)) throw new Error("Password is required!");
-        if (_.isEmpty(user.confirmPassword)) throw new Error("Confirm password to continue!");
-        if (!_.isEqual(user.password, user.confirmPassword)) throw new Error("Password didn't match!");
-        if (await Repository.isExist(user.username)) throw new Error("User has registered!");
-        if (await getHash(user.password)) {
-            user.password = await getHash(user.password);
-        }
-        try {
-            return [await Repository.create(user), await signToken(user)]
-        } catch (e) {
-            throw new Error(e)
-        }
-    };
+    // create = async user => {
+    //     if (_.isEmpty(user.username)) throw new Error("Username is required!");
+    //     if (_.isEmpty(user.password)) throw new Error("Password is required!");
+    //     if (_.isEmpty(user.confirmPassword)) throw new Error("Confirm password to continue!");
+    //     if (!_.isEqual(user.password, user.confirmPassword)) throw new Error("Password didn't match!");
+    //     if (await Repository.isExist(user.username)) throw new Error("User has registered!");
+    //     if (await getHash(user.password)) {
+    //         user.password = await getHash(user.password);
+    //     }
+    //     try {
+    //         return [await Repository.create(user), await signToken(user)]
+    //     } catch (e) {
+    //         throw new Error(e)
+    //     }
+    // };
     loginService = async (name,pass) =>{
         let user = await Repository.getByNamePass(name,pass);
         if(user){
-            return true;
+            return user;
         }
         else{
             return false;
+        }
+    };
+    registerService = async (user) => {
+        try {
+            return await Repository.create(user)
+        } catch (e) {
+            throw new Error(e)
         }
     };
     registerUser = async (user) => {

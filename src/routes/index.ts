@@ -4,6 +4,7 @@ import {Auth} from "./auth";
 import {Stories} from "./stories";
 import {Relationships} from "./relationships";
 import {Questions} from "./questions";
+import {Coffee} from "./coffee";
 
 export class Routes {
     constructor(app: e.Application) {
@@ -11,6 +12,7 @@ export class Routes {
         new Auth(app);
         new Stories(app);
         new Questions(app);
-        new Relationships(app)
+        new Relationships(app);
+        new Coffee(app)
     }
 }

@@ -25,7 +25,7 @@ export class BaseRepository {
 
     getByNamePass(userName,password){
         return new Promise((resolve)=>{
-            this.model.findOne({username:userName,password:password},(err,result)=>{
+            this.model.findOne({user_name:userName,password:password},(err,result)=>{
                 (err) && resolve([]);
                 resolve(result);
             })

@@ -4,8 +4,8 @@ export function BaseModel(name: string, properties: object) {
     return model(name, new Schema(Object.assign(
         properties,
         {
-            createdAt: {type: Date, default: Date.now},
-            updatedAt: {type: Date, default: Date.now}
+            created_at: {type: Date, default: Date.now},
+            updated_at: {type: Date, default: Date.now}
         }))
     )
 }
