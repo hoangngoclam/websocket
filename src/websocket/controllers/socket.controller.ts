@@ -74,6 +74,19 @@ class SocketController {
             this.player.sendMessage(message.getErrorMessage("Error call to this room"));
         }
     }
+
+    //data:{type:"SCORE",score:12}
+    updateScore(){
+        if(this.player.getRoomId()){
+            let myRoom = this.websocketClass.rooms.findRoomById(this.player.getRoomId().toString());
+            if(!myRoom.updateScorePlayers(this.player,this.data.score)){
+                this.player.sendMessage(message.getErrorMessage('Update score fail'))
+            }
+        }
+        else{
+            this.player.sendMessage(message.getErrorMessage('You have not room'))
+        }
+    }
 }
 
 export default SocketController;

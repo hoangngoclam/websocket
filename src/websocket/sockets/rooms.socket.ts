@@ -16,6 +16,7 @@ class RoomsSocket {
             })
         }
     }
+
     createRoom(player:PlayerSocket) {
         if(this.checkAuthCreated(player.getId())){
             return false;

@@ -7,7 +7,6 @@ export class RouteReceiveMessage {
     private socketController;
     constructor(){
     }
-
     message(websocketClass:WebsocketClass,player:PlayerSocket,message){
         let data;
         try {
@@ -37,6 +36,10 @@ export class RouteReceiveMessage {
             case "CALL_IN_ROOM":
                 //data:{type:"CALL_IN_ROOM",message:"Hello this is message"}
                 this.socketController.callInRoom();
+                break;
+            case "SCORE":
+                //data:{type:"SCORE",score:12}
+                this.socketController.updateScore();
                 break;
         }
     }

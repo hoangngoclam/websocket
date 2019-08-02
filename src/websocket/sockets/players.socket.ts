@@ -41,7 +41,7 @@ class PlayersSocket {
 
     getAllUserConnect(){
         return this.listPlayer.map(item=>{
-            return {id:item.getId(),roomId:item.getRoomId()}
+            return item.getShortInfo();
         })
     }
 }
